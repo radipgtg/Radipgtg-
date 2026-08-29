@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>radipgtg — ✦</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== BASE TRANSITION UNTUK SEMUA ELEMEN (SMOOTH THEME CHANGE) ===== */
+        body,
+        .header-about,
+        .music-widget,
+        .widget-mini,
+        .photo-card,
+        .carousel,
+        .bottom-link,
+        .quote,
+        .bio-tag span,
+        .music-info .title,
+        .music-info .artist,
+        .music-info .song-title,
+        .music-status,
+        .footer-note,
+        .widget-mini .value,
+        .widget-mini .label,
+        .widget-mini .icon,
+        .photo-card .caption,
+        .photo-card .caption i,
+        .indicators button,
+        .carousel-nav button,
+        .sparkle {
+            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== THEME VARIABLES ===== */
+        :root {
+            --bg1: #b8d8e8;
+            --bg2: #d4c8e8;
+            --bg3: #fce4ec;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #1a2a3a;
+            --text-secondary: #4a5a6a;
+            --text-light: #3a4a5a;
+            --accent: #5a7a8a;
+            --accent-light: #4a6a7a;
+            --shadow: rgba(0,0,0,0.02);
+            --glass-hover: rgba(255, 255, 255, 0.18);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== THEME 1: Ocean Dusk ===== */
+        .theme-ocean {
+            --bg1: #1E2A38;
+            --bg2: #4A607A;
+            --bg3: #A3B8C0;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.04);
+            --text-primary: #ffffff;
+            --text-secondary: #d0dce8;
+            --text-light: #A3B8C0;
+            --accent: #A3B8C0;
+            --accent-light: #C5D5DE;
+            --shadow: rgba(0,0,0,0.1);
+            --glass-hover: rgba(255, 255, 255, 0.10);
+            --glass-border-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== THEME 2: Sunset Peach ===== */
+        .theme-peach {
+            --bg1: #FFD6A6;
+            --bg2: #FFB399;
+            --bg3: #CA5995;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #3a1a2a;
+            --text-secondary: #5a3a4a;
+            --text-light: #7a5a6a;
+            --accent: #CA5995;
+            --accent-light: #d47aae;
+            --shadow: rgba(0,0,0,0.02);
+            --glass-hover: rgba(255, 255, 255, 0.22);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== THEME 3: Minty Fresh ===== */
+        .theme-mint {
+            --bg1: #d4e8d0;
+            --bg2: #a8d8a8;
+            --bg3: #7ec8a8;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #1a3a2a;
+            --text-secondary: #3a5a4a;
+            --text-light: #5a7a6a;
+            --accent: #5a9a7a;
+            --accent-light: #7ab89a;
+            --shadow: rgba(0,0,0,0.02);
+            --glass-hover: rgba(255, 255, 255, 0.18);
+            --glass-border-hover: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ===== THEME 4: Cotton Candy ===== */
+        .theme-candy {
+            --bg1: #FFB3B3;
+            --bg2: #FFD1D1;
+            --bg3: #B3E0F7;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #3a1a2a;
+            --text-secondary: #5a3a5a;
+            --text-light: #7a5a7a;
+            --accent: #b37a9a;
+            --accent-light: #c99aba;
+            --shadow: rgba(0,0,0,0.02);
+            --glass-hover: rgba(255, 255, 255, 0.22);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== THEME 5: Lavender Dream ===== */
+        .theme-lavender {
+            --bg1: #d4c8e8;
+            --bg2: #b8a8c8;
+            --bg3: #9a8ab8;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #2a1a3a;
+            --text-secondary: #4a3a5a;
+            --text-light: #6a5a7a;
+            --accent: #7a5a9a;
+            --accent-light: #9a7aba;
+            --shadow: rgba(0,0,0,0.02);
+            --glass-hover: rgba(255, 255, 255, 0.18);
+            --glass-border-hover: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ===== LOADING ===== */
+        #loading {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }
+        #loading.hide { opacity: 0; visibility: hidden; }
+
+        .loader-dots {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 0.8rem;
+        }
+        .loader-dots span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: dotBounce 0.9s ease-in-out infinite alternate;
+        }
+        .loader-dots span:nth-child(1) { background: var(--text-primary); animation-delay: 0s; }
+        .loader-dots span:nth-child(2) { background: var(--accent); animation-delay: 0.12s; }
+        .loader-dots span:nth-child(3) { background: var(--text-primary); animation-delay: 0.24s; }
+        .loader-dots span:nth-child(4) { background: var(--accent); animation-delay: 0.36s; }
+        .loader-dots span:nth-child(5) { background: var(--text-primary); animation-delay: 0.48s; }
+
+        @keyframes dotBounce {
+            0% { transform: translateY(0) scale(0.6); opacity: 0.3; }
+            100% { transform: translateY(-16px) scale(1.1); opacity: 1; }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            animation: pulseText 1.6s ease-in-out infinite;
+        }
+        @keyframes pulseText { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* ===== BODY ===== */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
+            padding: 1.5rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== SPARKLE (PELAN-PELAN) ===== */
+        .sparkle-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .sparkle {
+            position: absolute;
+            border-radius: 50%;
+            animation: sparkleRandom 8s ease-in-out infinite alternate;
+            opacity: 0.15;
+        }
+        .sparkle:nth-child(1n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
+        .sparkle:nth-child(2n) { background: var(--accent); box-shadow: 0 0 18px var(--accent); }
+        .sparkle:nth-child(3n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
+        .sparkle:nth-child(4n) { background: var(--accent-light); box-shadow: 0 0 18px var(--accent-light); }
+        .sparkle:nth-child(5n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
+
+        @keyframes sparkleRandom {
+            0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0.05; }
+            25% { transform: translate(40px, -30px) scale(1.0) rotate(90deg); opacity: 0.3; }
+            50% { transform: translate(-20px, 50px) scale(0.4) rotate(180deg); opacity: 0.15; }
+            75% { transform: translate(50px, 20px) scale(0.8) rotate(270deg); opacity: 0.25; }
+            100% { transform: translate(-30px, -40px) scale(0.3) rotate(360deg); opacity: 0.05; }
+        }
+
+        /* ===== HIASAN ===== */
+        .deco {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 2.4rem;
+            opacity: 0.08;
+            animation: floatDeco 16s ease-in-out infinite alternate;
+        }
+        .deco:nth-child(2) { top: 3%; left: 2%; font-size: 3rem; animation-duration: 18s; }
+        .deco:nth-child(3) { top: 5%; right: 3%; font-size: 2.2rem; animation-duration: 14s; animation-delay: 1s; }
+        .deco:nth-child(4) { top: 48%; left: 1.5%; font-size: 2.6rem; animation-duration: 20s; animation-delay: 0.5s; }
+        .deco:nth-child(5) { top: 42%; right: 2%; font-size: 2rem; animation-duration: 15s; animation-delay: 2s; }
+        .deco:nth-child(6) { bottom: 5%; left: 2%; font-size: 3.4rem; animation-duration: 22s; animation-delay: 0.8s; }
+        .deco:nth-child(7) { bottom: 7%; right: 3%; font-size: 2.6rem; animation-duration: 17s; animation-delay: 1.5s; }
+        .deco:nth-child(8) { bottom: 2%; left: 50%; transform: translateX(-50%); font-size: 2.8rem; animation-duration: 24s; animation-delay: 2.2s; }
+        .deco:nth-child(9) { top: 18%; left: 50%; transform: translateX(-50%); font-size: 1.8rem; animation-duration: 19s; animation-delay: 1s; }
+        .deco:nth-child(10) { top: 75%; left: 6%; font-size: 2rem; animation-duration: 21s; animation-delay: 0.3s; }
+        .deco:nth-child(11) { top: 70%; right: 5%; font-size: 2.2rem; animation-duration: 16s; animation-delay: 1.8s; }
+        .deco:nth-child(12) { top: 28%; left: 5%; font-size: 1.8rem; animation-duration: 23s; animation-delay: 0.6s; }
+        .deco:nth-child(13) { top: 24%; right: 4%; font-size: 2rem; animation-duration: 18s; animation-delay: 2.5s; }
+        .deco:nth-child(14) { top: 12%; left: 10%; font-size: 2rem; animation-duration: 20s; animation-delay: 1.2s; }
+        .deco:nth-child(15) { bottom: 18%; left: 8%; font-size: 2.2rem; animation-duration: 22s; animation-delay: 0.9s; }
+        .deco:nth-child(16) { bottom: 20%; right: 7%; font-size: 2.4rem; animation-duration: 19s; animation-delay: 1.6s; }
+        .deco:nth-child(17) { top: 35%; left: 3%; font-size: 1.8rem; animation-duration: 25s; animation-delay: 0.4s; }
+        .deco:nth-child(18) { top: 38%; right: 3%; font-size: 2rem; animation-duration: 21s; animation-delay: 2.1s; }
+        .deco:nth-child(19) { top: 55%; left: 50%; transform: translateX(-50%); font-size: 1.8rem; animation-duration: 23s; animation-delay: 1.4s; }
+        .deco:nth-child(20) { bottom: 30%; left: 50%; transform: translateX(-50%); font-size: 2rem; animation-duration: 20s; animation-delay: 0.7s; }
+        .deco:nth-child(21) { top: 8%; left: 20%; font-size: 2rem; animation-duration: 17s; animation-delay: 0.2s; }
+        .deco:nth-child(22) { bottom: 12%; right: 12%; font-size: 2.2rem; animation-duration: 19s; animation-delay: 1.1s; }
+        .deco:nth-child(23) { top: 60%; left: 4%; font-size: 1.6rem; animation-duration: 21s; animation-delay: 0.9s; }
+        .deco:nth-child(24) { bottom: 40%; right: 4%; font-size: 1.8rem; animation-duration: 18s; animation-delay: 1.7s; }
+        .deco:nth-child(25) { top: 15%; left: 12%; font-size: 1.6rem; animation-duration: 20s; animation-delay: 0.3s; }
+        .deco:nth-child(26) { bottom: 15%; right: 10%; font-size: 1.8rem; animation-duration: 22s; animation-delay: 1.3s; }
+
+        @keyframes floatDeco {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(40px, -50px) rotate(22deg) scale(1.12); }
+        }
+
+        /* ===== KONTEN ===== */
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-about {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+            background: var(--glass-bg);
+            padding: 0.3rem 2rem;
+            border-radius: 3rem;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 0.6rem;
+            backdrop-filter: blur(4px);
+            text-align: center;
+        }
+        .header-about i {
+            color: var(--accent-light);
+            margin-right: 6px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--glass-border);
+            box-shadow: 0 8px 30px var(--shadow);
+            margin-bottom: 0.4rem;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .username {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.05rem;
+        }
+        .username span {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bio-tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.6rem;
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .bio-tag span {
+            background: var(--glass-bg);
+            padding: 0.1rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===== MUSIC WIDGET ===== */
+        .music-widget {
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem 1rem 2rem 1rem;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.6rem;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+        .music-widget:hover {
+            background: var(--glass-hover);
+            border-color: var(--glass-border-hover);
+        }
+
+        .music-logo {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 4px 12px var(--shadow);
+            animation: spinLogo 8s linear infinite;
+        }
+        .music-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @keyframes spinLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .music-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .music-info .title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .music-info .artist {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+        .music-info .song-title {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .music-status {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .music-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #25d366;
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== WIDGET KECIL ===== */
+        .widget-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+        .widget-mini {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
+            padding: 0.5rem 0.2rem;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        .widget-mini:hover {
+            background: var(--glass-hover);
+            transform: translateY(-3px);
+        }
+        .widget-mini .icon {
+            font-size: 1.2rem;
+            color: var(--accent-light);
+        }
+        .widget-mini .value {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 0.1rem;
+            line-height: 1.2;
+        }
+        .widget-mini .label {
+            font-size: 0.45rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== CAROUSEL ===== */
+        .carousel {
+            overflow: hidden;
+            border-radius: 1.8rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            min-height: 115px;
+            width: 100%;
+            backdrop-filter: blur(4px);
+            margin-bottom: 0.5rem;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .slide {
+            min-width: 100%;
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 0.9rem;
+            font-weight: 400;
+            min-height: 105px;
+        }
+        .slide h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+        .slide .emoji-big {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.1rem;
+        }
+        .slide i {
+            color: var(--accent-light);
+            margin: 0 4px;
+        }
+
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .carousel-nav button {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.75rem;
+        }
+        .carousel-nav button:hover {
+            background: var(--glass-hover);
+            border-color: var(--glass-border-hover);
+        }
+        .indicators {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .indicators button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: none;
+            background: var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+        .indicators button.active {
+            background: var(--accent);
+            width: 22px;
+            border-radius: 4px;
+            box-shadow: 0 0 16px var(--accent);
+        }
+
+        .quote {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            text-align: center;
+            margin: 0.2rem 0 0.2rem;
+            opacity: 0.75;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .quote i {
+            color: var(--accent-light);
+            margin: 0 4px;
+            opacity: 0.6;
+        }
+
+        .bottom-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 0.4rem 0 0.6rem;
+            flex-wrap: wrap;
+        }
+        .bottom-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .bottom-link span {
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+        .bottom-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-3px);
+        }
+        .bottom-link.wa:hover { color: #25d366; }
+        .bottom-link.ig:hover { color: #C5D5DE; }
+        .bottom-link.tg:hover { color: #A3B8C0; }
+        .bottom-link.saweria:hover { color: #C5D5DE; }
+
+        /* ===== PHOTO GRID ===== */
+        .photo-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            margin-top: 0.4rem;
+        }
+        .photo-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
+            overflow: hidden;
+            border: 1.5px solid var(--glass-border);
+            box-shadow: 0 4px 20px var(--shadow), 
+                        inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
+            padding: 1.5px;
+            background: linear-gradient(135deg, 
+                var(--glass-border-hover) 0%, 
+                var(--glass-border) 50%, 
+                var(--glass-border-hover) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
+        }
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+        .photo-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: var(--glass-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 12px 40px var(--shadow), 0 0 30px var(--glass-border-hover);
+        }
+        .photo-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+            border-radius: 1.5rem 0.8rem 0 0;
+        }
+        .photo-card .caption {
+            padding: 0.6rem 0.6rem 0.7rem;
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+            opacity: 0.75;
+            background: rgba(255,255,255,0.02);
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+            border-top: 1px solid var(--glass-border);
+        }
+        .photo-card .caption i {
+            color: var(--accent-light);
+            margin-right: 4px;
+            font-size: 0.55rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.6rem;
+            margin-top: 0.8rem;
+            opacity: 0.4;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .avatar { width: 80px; height: 80px; }
+            .username { font-size: 1.5rem; }
+            .header-about { font-size: 0.75rem; padding: 0.15rem 1.2rem; }
+            .slide { font-size: 0.8rem; padding: 0.8rem 1rem; min-height: 95px; }
+            .carousel { min-height: 95px; }
+            .carousel-nav button { width: 28px; height: 28px; font-size: 0.65rem; }
+            .bottom-link { font-size: 1rem; gap: 0.2rem; }
+            .bottom-link span { font-size: 0.65rem; }
+            .quote { font-size: 0.75rem; }
+            .deco { display: none; }
+            .sparkle { width: 3px !important; height: 3px !important; }
+            .loader-dots span { width: 10px; height: 10px; gap: 8px; }
+            .widget-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+            .music-widget { padding: 0.6rem 0.8rem; }
+            .music-logo { width: 40px; height: 40px; }
+            .music-info .title { font-size: 0.75rem; }
+            .photo-grid { gap: 0.4rem; }
+            .photo-card { border-radius: 1.2rem 0.6rem 1.2rem 0.6rem; }
+            .photo-card .caption { font-size: 0.5rem; padding: 0.4rem 0.3rem 0.5rem; }
+            .photo-card::before { border-radius: 1.2rem 0.6rem 1.2rem 0.6rem; }
+        }
+        @media (max-width: 380px) {
+            .widget-grid { grid-template-columns: repeat(2, 1fr); }
+            .widget-mini { padding: 0.3rem 0.1rem; }
+            .widget-mini .icon { font-size: 1rem; }
+            .widget-mini .value { font-size: 0.55rem; }
+            .bottom-links { gap: 1rem; }
+            .photo-grid { gap: 0.3rem; }
+            .photo-card .caption { font-size: 0.45rem; padding: 0.3rem 0.2rem 0.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading">
+        <div class="loader-dots">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="loading-text">✦ menata ✦</div>
+    </div>
+
+    <div class="sparkle-container" id="sparkleContainer"></div>
+    <script>
+        (function() {
+            const c = document.getElementById('sparkleContainer');
+            for (let i = 0; i < 160; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                const size = 2 + Math.random() * 8;
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.animationDelay = (Math.random() * 8) + 's';
+                s.style.animationDuration = (7 + Math.random() * 5) + 's';
+                c.appendChild(s);
+            }
+        })();
+    </script>
+
+    <div class="deco" style="top:3%; left:2%;">🌊</div>
+    <div class="deco" style="top:5%; right:3%;">🌙</div>
+    <div class="deco" style="top:48%; left:1.5%;">⭐</div>
+    <div class="deco" style="top:42%; right:2%;">🌿</div>
+    <div class="deco" style="bottom:5%; left:2%;">🌺</div>
+    <div class="deco" style="bottom:7%; right:3%;">🍃</div>
+    <div class="deco" style="bottom:2%; left:50%; transform:translateX(-50%);">🪷</div>
+    <div class="deco" style="top:18%; left:50%; transform:translateX(-50%);">☘️</div>
+    <div class="deco" style="top:75%; left:6%;">🌱</div>
+    <div class="deco" style="top:70%; right:5%;">🌿</div>
+    <div class="deco" style="top:28%; left:5%;">🍀</div>
+    <div class="deco" style="top:24%; right:4%;">🌸</div>
+    <div class="deco" style="top:12%; left:10%;">🌼</div>
+    <div class="deco" style="bottom:18%; left:8%;">🌷</div>
+    <div class="deco" style="bottom:20%; right:7%;">🌻</div>
+    <div class="deco" style="top:35%; left:3%;">✨</div>
+    <div class="deco" style="top:38%; right:3%;">💫</div>
+    <div class="deco" style="top:55%; left:50%; transform:translateX(-50%);">🌊</div>
+    <div class="deco" style="bottom:30%; left:50%; transform:translateX(-50%);">🌙</div>
+    <div class="deco" style="top:8%; left:20%;">🪸</div>
+    <div class="deco" style="bottom:12%; right:12%;">🌸</div>
+    <div class="deco" style="top:60%; left:4%;">🍀</div>
+    <div class="deco" style="bottom:40%; right:4%;">🌺</div>
+    <div class="deco" style="top:45%; left:50%; transform:translateX(-50%); font-size:1.6rem;">🕊️</div>
+    <div class="deco" style="top:15%; left:12%; font-size:1.6rem;">🌻</div>
+    <div class="deco" style="bottom:15%; right:10%; font-size:1.8rem;">🌺</div>
+
+    <audio id="bgMusic" autoplay></audio>
+    <div class="content">
+
+        <div class="header-about">
+            <i class="fas fa-water"></i> About Me
+        </div>
+
+        <div class="avatar">
+            <img src="https://files.catbox.moe/au2cau.jpg" alt="radipgtg" />
+        </div>
+
+        <div class="username">radip<span>gtg</span></div>
+        <div class="bio-tag">
+            <span>✨ 24/7</span>
+            <span>🍄 South korea</span>
+            <span>⭐ orang ganteng</span>
+        </div>
+
+        <div class="music-widget">
+            <div class="music-logo">
+                <img src="https://files.catbox.moe/tldoet.jpg" alt="music logo" />
+            </div>
+            <div class="music-info">
+                <div class="title" id="nowPlaying">🎵 Sedang diputar</div>
+                <div class="artist">Wave to earth</div>
+                <div class="song-title" id="songTitle">— Seasons</div>
+            </div>
+            <div class="music-status">
+                <span class="dot"></span>
+                <span>LIVE</span>
+            </div>
+        </div>
+
+        <div class="widget-grid">
+            <div class="widget-mini">
+                <div class="icon"><i class="fas fa-clock"></i></div>
+                <div class="value" id="clockDisplay">--:--</div>
+                <div class="label">Waktu</div>
+            </div>
+            <div class="widget-mini">
+                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="value">🇮🇩 ID</div>
+                <div class="label">Lokasi</div>
+            </div>
+            <div class="widget-mini">
+                <div class="icon"><i class="fas fa-smile"></i></div>
+                <div class="value">💫Happy</div>
+                <div class="label">Mood</div>
+            </div>
+            <div class="widget-mini">
+                <div class="icon"><i class="fas fa-wifi"></i></div>
+                <div class="value">💚 Online</div>
+                <div class="label">Status</div>
+            </div>
+        </div>
+        
+        <div class="carousel">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <span class="emoji-big">🌱</span>
+                    <h4>Tentang Aku</h4>
+                    <p>Halo! aku Radipgtg Aku lahir 10 desember 2009, Wave to Earth has been on repeat 24/7. #NEWJEANS 5 — Orang tertampan di dunia bahkan ngalahin idol kalian semua, salam kenal yak 💖</p>
+                </div>
+                <div class="slide">
+                    <span class="emoji-big">🎨</span>
+                    <h4>Hobi</h4>
+                    <p><i class="fas fa-utensils"></i> Makan · <i class="fas fa-tv"></i> Nonton · <i class="fas fa-mug-hot"></i> Tidur</p>
+                </div>
+                <div class="slide">
+                    <span class="emoji-big">✨</span>
+                    <h4>Motto</h4>
+                    <p>“Ga ada motto, aku mau tidur” — Radipgtg</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <div class="indicators" id="indicators">
+                <button class="active" data-index="0"></button>
+                <button data-index="1"></button>
+                <button data-index="2"></button>
+            </div>
+            <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="quote">
+            <i class="fas fa-quote-left"></i> 
+            "Hidup ini bukan matematika. Tidak ada jawaban pasti, dan kita hanya perlu menjalaninya sebaik mungkin." – Hong Du-sik 
+            <i class="fas fa-quote-right"></i>
+        </div>
+
+        <div class="bottom-links">
+            <a href="https://wa.me/6285711170694" target="_blank" class="bottom-link wa">
+                <i class="fab fa-whatsapp"></i> <span>WA</span>
+            </a>
+            <a href="https://instagram.com/radipppppp" target="_blank" class="bottom-link ig">
+                <i class="fab fa-instagram"></i> <span>IG</span>
+            </a>
+            <a href="https://t.me/radipgtg" target="_blank" class="bottom-link tg">
+                <i class="fab fa-telegram-plane"></i> <span>Tele</span>
+            </a>
+            <a href="https://saweria.co/radipgtg" target="_blank" class="bottom-link saweria">
+                <i class="fas fa-heart"></i> <span>Saweria</span>
+            </a>
+        </div>
+
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="https://files.catbox.moe/tgoar2.jpg" alt="foto 1" />
+                <div class="caption">
+                    <i class="fas fa-camera"></i> Radipgtg #1
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="https://files.catbox.moe/wtfrpk.jpg" alt="foto 2" />
+                <div class="caption">
+                    <i class="fas fa-camera"></i> Radipgtg #2
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="https://files.catbox.moe/vpkx3b.jpg" alt="foto 3" />
+                <div class="caption">
+                    <i class="fas fa-camera"></i> Radipgtg #3
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ✦ dibuat dengan cinta & semangat — radipgtg ✦
+        </div>
+
+    </div>
+    <script>
+        
+        const playlist = [
+            { src: 'https://files.catbox.moe/b1oxyb.mp3', title: 'Seasons', artist: 'Wave to earth' },
+            { src: 'https://files.catbox.moe/16vvou.mp3', title: 'Bad', artist: 'Wave to earth' },
+            { src: 'https://files.catbox.moe/sybkg3.mp3', title: 'Love', artist: 'Wave to earth' }
+        ];
+
+        let currentSongIndex = 0;
+        const audio = document.getElementById('bgMusic');
+        const nowPlayingEl = document.getElementById('nowPlaying');
+        const songTitleEl = document.getElementById('songTitle');
+
+        function loadSong(index) {
+            const song = playlist[index];
+            audio.src = song.src;
+            audio.load();
+            audio.play().catch(() => {});
+            nowPlayingEl.textContent = '🎵 Sedang diputar';
+            songTitleEl.textContent = '— ' + song.title;
+        }
+
+        audio.addEventListener('ended', function() {
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            loadSong(currentSongIndex);
+        });
+
+        loadSong(0);
+
+        document.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play().catch(() => {});
+            }
+        }, { once: true });
+
+        const themes = [
+            'theme-ocean',
+            'theme-peach',
+            'theme-mint',
+            'theme-candy',
+            'theme-lavender'
+        ];
+
+        let currentThemeIndex = 0;
+
+        function changeTheme() {
+       
+            themes.forEach(t => document.documentElement.classList.remove(t));
+           
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            document.documentElement.classList.add(themes[currentThemeIndex]);
+        }
+
+        setInterval(changeTheme, 15000);
+
+        document.documentElement.classList.add('theme-ocean');
+
+        const slides = document.getElementById('slides');
+        const indicators = document.querySelectorAll('.indicators button');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
+        let current = 0;
+        const total = 3;
+        let moving = false;
+
+        function goTo(i) {
+            if (moving) return;
+            if (i < 0) i = total - 1;
+            if (i >= total) i = 0;
+            moving = true;
+            current = i;
+            slides.style.transform = `translateX(-${current * 100}%)`;
+            indicators.forEach((btn, idx) => btn.classList.toggle('active', idx === current));
+            setTimeout(() => moving = false, 500);
+        }
+
+        prev.addEventListener('click', () => goTo(current - 1));
+        next.addEventListener('click', () => goTo(current + 1));
+        indicators.forEach(btn => btn.addEventListener('click', () => goTo(parseInt(btn.dataset.index))));
+
+        // Swipe
+        let startX = 0;
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
+        carousel.addEventListener('touchend', e => {
+            const diff = startX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+        });
+
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hide');
+            }, 1800);
+        });
+
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clockDisplay').textContent = hours + ':' + minutes;
+        }
+        updateClock();
+        setInterval(updateClock, 10000);
+    </script>
+
+</body>
+</html>
