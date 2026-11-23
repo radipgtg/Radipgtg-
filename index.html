@@ -1,1020 +1,443 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>radipgtg — ✦</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>radipgtg — Owner Totoro AI</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#fbf5e6;
+  --paper-2:#f5ecd5;
+  --ink:#38503f;
+  --ink-soft:#7b8a76;
+  --brown:#8a6a47;
+  --leaf:#8fb58a;
+  --leaf-deep:#4d7a58;
+  --sky:#cfe6e6;
+  --peach:#f4c3a1;
+  --line:rgba(77,122,88,.18);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --serif:'Shippori Mincho',serif;
+  --sans:'Zen Maru Gothic',sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:5.2rem}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:100%;max-width:540px;margin:0 auto;padding:0 1.3rem}
 
-        /* ===== BASE TRANSITION UNTUK SEMUA ELEMEN (SMOOTH THEME CHANGE) ===== */
-        body,
-        .header-about,
-        .music-widget,
-        .widget-mini,
-        .photo-card,
-        .carousel,
-        .bottom-link,
-        .quote,
-        .bio-tag span,
-        .music-info .title,
-        .music-info .artist,
-        .music-info .song-title,
-        .music-status,
-        .footer-note,
-        .widget-mini .value,
-        .widget-mini .label,
-        .widget-mini .icon,
-        .photo-card .caption,
-        .photo-card .caption i,
-        .indicators button,
-        .carousel-nav button,
-        .sparkle {
-            transition: all 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+/* loading */
+#loading{position:fixed;inset:0;z-index:9999;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity 1.1s var(--ease),visibility 1.1s}
+#loading.hide{opacity:0;visibility:hidden}
+.seed{width:14px;height:14px;border-radius:50% 50% 50% 0;background:var(--leaf);transform:rotate(-45deg);animation:sprout 1.6s var(--ease) infinite alternate}
+@keyframes sprout{from{transform:rotate(-45deg) scale(.6);opacity:.5}to{transform:rotate(-45deg) scale(1.5) translate(2px,2px);opacity:1}}
+.loading-text{font-family:var(--serif);font-size:.95rem;color:var(--ink-soft);letter-spacing:.3em}
 
-        /* ===== THEME VARIABLES ===== */
-        :root {
-            --bg1: #b8d8e8;
-            --bg2: #d4c8e8;
-            --bg3: #fce4ec;
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #1a2a3a;
-            --text-secondary: #4a5a6a;
-            --text-light: #3a4a5a;
-            --accent: #5a7a8a;
-            --accent-light: #4a6a7a;
-            --shadow: rgba(0,0,0,0.02);
-            --glass-hover: rgba(255, 255, 255, 0.18);
-            --glass-border-hover: rgba(255, 255, 255, 0.15);
-        }
+/* header */
+.top{position:sticky;top:0;z-index:50;background:rgba(251,245,230,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .6s var(--ease)}
+.top.scrolled{box-shadow:0 8px 24px rgba(77,122,88,.1)}
+.top .wrap{display:flex;align-items:center;gap:.8rem;padding-top:.7rem;padding-bottom:.7rem}
+.brand{display:flex;align-items:center;gap:.5rem;text-decoration:none;font-family:var(--serif);font-weight:700;font-size:1.1rem;flex-shrink:0}
+.brand i{color:var(--leaf-deep);transition:transform .8s var(--ease)}
+.brand:hover i{transform:rotate(25deg) scale(1.15)}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:.5rem;background:#fff;border:1.5px solid var(--line);border-radius:2rem;padding:.4rem .9rem;transition:border-color .5s var(--ease),box-shadow .5s var(--ease)}
+.search:focus-within{border-color:var(--leaf);box-shadow:0 0 0 5px rgba(143,181,138,.2)}
+.search i{color:var(--ink-soft);font-size:.8rem}
+.search .host{font-size:.78rem;font-weight:700;color:var(--leaf-deep);white-space:nowrap}
+.search input{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:.8rem;color:var(--ink)}
+.search input::placeholder{color:#b3b8a8}
+.clock{font-size:.78rem;font-weight:700;color:var(--ink-soft);flex-shrink:0}
 
-        /* ===== THEME 1: Ocean Dusk ===== */
-        .theme-ocean {
-            --bg1: #1E2A38;
-            --bg2: #4A607A;
-            --bg3: #A3B8C0;
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.04);
-            --text-primary: #ffffff;
-            --text-secondary: #d0dce8;
-            --text-light: #A3B8C0;
-            --accent: #A3B8C0;
-            --accent-light: #C5D5DE;
-            --shadow: rgba(0,0,0,0.1);
-            --glass-hover: rgba(255, 255, 255, 0.10);
-            --glass-border-hover: rgba(255, 255, 255, 0.08);
-        }
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#cfe6e6 0%,#e6f0df 55%,var(--paper) 100%)}
+.scene{display:block;width:100%;height:auto}
+.cloud{animation:drift 60s linear infinite}
+.cloud.c2{animation-duration:90s;animation-delay:-35s}
+.cloud.c3{animation-duration:75s;animation-delay:-12s}
+@keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(1000px)}}
+.sun{animation:glow 7s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.75}to{opacity:1}}
+.hero-body{position:relative;margin-top:-76px;text-align:center;padding-bottom:2.2rem}
+.avatar{width:116px;height:116px;margin:0 auto 1rem;border-radius:50%;padding:5px;background:var(--paper);box-shadow:0 14px 34px rgba(77,122,88,.25);animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.username{font-family:var(--serif);font-weight:700;font-size:2.1rem;line-height:1.2}
+.username span{color:var(--leaf-deep)}
+.role{display:inline-flex;align-items:center;gap:.5rem;margin-top:.6rem;padding:.35rem 1.1rem;border-radius:2rem;font-size:.8rem;font-weight:700;color:var(--leaf-deep);background:rgba(143,181,138,.22)}
+.whisper{position:relative;height:3.2rem;margin:1.2rem auto 0;max-width:30ch}
+.whisper p{position:absolute;inset:0;font-family:var(--serif);font-size:.98rem;color:var(--brown);opacity:0;transform:translateY(8px);transition:opacity 1.6s var(--ease),transform 1.6s var(--ease)}
+.whisper p.on{opacity:1;transform:none}
 
-        /* ===== THEME 2: Sunset Peach ===== */
-        .theme-peach {
-            --bg1: #FFD6A6;
-            --bg2: #FFB399;
-            --bg3: #CA5995;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #3a1a2a;
-            --text-secondary: #5a3a4a;
-            --text-light: #7a5a6a;
-            --accent: #CA5995;
-            --accent-light: #d47aae;
-            --shadow: rgba(0,0,0,0.02);
-            --glass-hover: rgba(255, 255, 255, 0.22);
-            --glass-border-hover: rgba(255, 255, 255, 0.15);
-        }
+/* chapter */
+.chap{padding:2.6rem 0 .6rem;transition:opacity .7s var(--ease),filter .7s var(--ease)}
+.chap.dim{opacity:.22;filter:blur(1px)}
+.chap-title{display:flex;align-items:baseline;gap:.7rem;margin-bottom:1.1rem}
+.chap-title small{font-size:.75rem;font-weight:700;color:var(--leaf-deep);white-space:nowrap}
+.chap-title h2{font-family:var(--serif);font-size:1.45rem;font-weight:700;white-space:nowrap}
+.chap-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);align-self:center}
+.lede{font-size:.95rem;color:var(--ink-soft);font-weight:500}
 
-        /* ===== THEME 3: Minty Fresh ===== */
-        .theme-mint {
-            --bg1: #d4e8d0;
-            --bg2: #a8d8a8;
-            --bg3: #7ec8a8;
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --text-primary: #1a3a2a;
-            --text-secondary: #3a5a4a;
-            --text-light: #5a7a6a;
-            --accent: #5a9a7a;
-            --accent-light: #7ab89a;
-            --shadow: rgba(0,0,0,0.02);
-            --glass-hover: rgba(255, 255, 255, 0.18);
-            --glass-border-hover: rgba(255, 255, 255, 0.12);
-        }
+/* reveal */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
 
-        /* ===== THEME 4: Cotton Candy ===== */
-        .theme-candy {
-            --bg1: #FFB3B3;
-            --bg2: #FFD1D1;
-            --bg3: #B3E0F7;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #3a1a2a;
-            --text-secondary: #5a3a5a;
-            --text-light: #7a5a7a;
-            --accent: #b37a9a;
-            --accent-light: #c99aba;
-            --shadow: rgba(0,0,0,0.02);
-            --glass-hover: rgba(255, 255, 255, 0.22);
-            --glass-border-hover: rgba(255, 255, 255, 0.15);
-        }
+/* about */
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0}
+.tags span{padding:.3rem .95rem;border-radius:2rem;background:#fff;border:1.5px solid var(--line);font-size:.78rem;font-weight:700;color:var(--brown);transition:transform .5s var(--ease),border-color .5s}
+.tags span:hover{transform:translateY(-3px);border-color:var(--leaf)}
+.glance{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1.5px solid var(--line);border-radius:1.4rem;overflow:hidden}
+.glance div{padding:.9rem .3rem;text-align:center;border-right:1px solid var(--line);transition:background .5s}
+.glance div:last-child{border-right:none}
+.glance div:hover{background:var(--paper)}
+.glance i{color:var(--leaf-deep);font-size:.95rem}
+.glance b{display:block;font-size:.78rem;margin-top:.25rem}
+.glance small{font-size:.65rem;color:var(--ink-soft);font-weight:500}
 
-        /* ===== THEME 5: Lavender Dream ===== */
-        .theme-lavender {
-            --bg1: #d4c8e8;
-            --bg2: #b8a8c8;
-            --bg3: #9a8ab8;
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --text-primary: #2a1a3a;
-            --text-secondary: #4a3a5a;
-            --text-light: #6a5a7a;
-            --accent: #7a5a9a;
-            --accent-light: #9a7aba;
-            --shadow: rgba(0,0,0,0.02);
-            --glass-hover: rgba(255, 255, 255, 0.18);
-            --glass-border-hover: rgba(255, 255, 255, 0.12);
-        }
+/* totoro stop */
+.stop{position:relative;background:linear-gradient(160deg,#e3eedb,#f5e9d0);border-radius:1.8rem 1.8rem 1.8rem .6rem;padding:1.8rem 1.5rem 1.6rem;overflow:hidden}
+.stop::before{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.45)}
+.stop-sign{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:.5rem;background:var(--leaf-deep);color:#fdf8ea;font-size:.78rem;font-weight:700;margin-bottom:1rem}
+.stop h3{position:relative;font-family:var(--serif);font-size:1.5rem;line-height:1.3;margin-bottom:.5rem}
+.stop p{position:relative;font-size:.9rem;color:#5b6d57;font-weight:500}
+.owner{position:relative;display:flex;align-items:center;gap:.6rem;margin:1.1rem 0;font-size:.82rem;font-weight:700;color:var(--brown)}
+.owner i{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--leaf-deep);font-size:.8rem}
+.cta{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.3rem;border-radius:1.2rem;background:var(--leaf-deep);color:#fdf8ea;text-decoration:none;font-weight:700;font-size:.95rem;box-shadow:0 12px 26px rgba(77,122,88,.32);transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.cta span{display:flex;align-items:center;gap:.6rem}
+.cta .go{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;transition:transform .6s var(--ease)}
+.cta:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(77,122,88,.4)}
+.cta:hover .go{transform:translateX(5px) rotate(-12deg)}
 
-        /* ===== LOADING ===== */
-        #loading {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1.2s ease, visibility 1.2s ease;
-        }
-        #loading.hide { opacity: 0; visibility: hidden; }
+/* music */
+.player{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.2rem;background:#fff;border:1.5px solid var(--line);border-radius:1.6rem}
+.disc{position:relative;flex-shrink:0;width:64px;height:64px;border-radius:50%;overflow:hidden;box-shadow:0 8px 20px rgba(138,106,71,.28);animation:spin 9s linear infinite;animation-play-state:paused}
+.player.playing .disc{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.disc img{width:100%;height:100%;object-fit:cover;display:block}
+.disc::after{content:"";position:absolute;inset:0;margin:auto;width:14px;height:14px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 3px rgba(0,0,0,.08)}
+.p-info{flex:1;min-width:0}
+.p-info small{font-size:.68rem;font-weight:700;color:var(--leaf-deep)}
+.p-info h4{font-family:var(--serif);font-size:1.05rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-info span{font-size:.75rem;color:var(--ink-soft);font-weight:500}
+.bar{height:4px;margin-top:.55rem;border-radius:2px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf),var(--peach));border-radius:2px;transition:width .4s linear}
+.ctrl{display:flex;gap:.4rem;flex-shrink:0}
+.ctrl button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:var(--paper-2);color:var(--leaf-deep);font-size:.8rem;transition:transform .5s var(--ease),background .5s}
+.ctrl button:hover{transform:scale(1.12);background:#e3eedb}
+.ctrl button.main{background:var(--leaf-deep);color:#fff}
 
-        .loader-dots {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 0.8rem;
-        }
-        .loader-dots span {
-            display: block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: dotBounce 0.9s ease-in-out infinite alternate;
-        }
-        .loader-dots span:nth-child(1) { background: var(--text-primary); animation-delay: 0s; }
-        .loader-dots span:nth-child(2) { background: var(--accent); animation-delay: 0.12s; }
-        .loader-dots span:nth-child(3) { background: var(--text-primary); animation-delay: 0.24s; }
-        .loader-dots span:nth-child(4) { background: var(--accent); animation-delay: 0.36s; }
-        .loader-dots span:nth-child(5) { background: var(--text-primary); animation-delay: 0.48s; }
+/* pages */
+.book{position:relative;background:var(--paper-2);border-radius:1.6rem;padding:.4rem .4rem 1rem;border:1.5px dashed rgba(138,106,71,.3)}
+.book-view{overflow:hidden;border-radius:1.2rem}
+.slides{display:flex;transition:transform .9s var(--ease)}
+.slide{min-width:100%;padding:1.6rem 1.5rem .8rem;text-align:center;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem}
+.slide .em{font-size:2rem}
+.slide h4{font-family:var(--serif);font-size:1.15rem}
+.slide p{font-size:.9rem;color:#6d6a58;font-weight:500;max-width:32ch}
+.slide p i{color:var(--leaf-deep);margin:0 3px}
+.book-nav{display:flex;align-items:center;justify-content:center;gap:1rem}
+.book-nav button.arrow{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--leaf-deep);cursor:pointer;font-size:.72rem;transition:transform .5s var(--ease)}
+.book-nav button.arrow:hover{transform:scale(1.14)}
+.dots{display:flex;gap:.45rem}
+.dots button{width:8px;height:8px;border-radius:4px;border:none;background:var(--line);cursor:pointer;padding:0;transition:all .6s var(--ease)}
+.dots button.active{width:24px;background:var(--leaf-deep)}
 
-        @keyframes dotBounce {
-            0% { transform: translateY(0) scale(0.6); opacity: 0.3; }
-            100% { transform: translateY(-16px) scale(1.1); opacity: 1; }
-        }
+/* quote */
+.quote{text-align:center;padding:0 .5rem}
+.quote .mark{font-family:var(--serif);font-size:4.2rem;line-height:.6;color:var(--peach)}
+.quote p{font-family:var(--serif);font-size:1.12rem;line-height:1.9;color:var(--ink)}
+.quote cite{display:block;margin-top:.8rem;font-size:.8rem;font-style:normal;font-weight:700;color:var(--brown)}
 
-        .loading-text {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            animation: pulseText 1.6s ease-in-out infinite;
-        }
-        @keyframes pulseText { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+/* photos */
+.snaps{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;padding:.4rem .2rem}
+.snap{position:relative;background:#fff;padding:.4rem .4rem .1rem;border-radius:.4rem;box-shadow:0 10px 22px rgba(138,106,71,.18);transform:rotate(var(--r));transition:transform .8s var(--ease),box-shadow .8s var(--ease)}
+.snap::before{content:"";position:absolute;top:-9px;left:50%;width:42px;height:16px;margin-left:-21px;background:rgba(244,195,161,.7);transform:rotate(-3deg)}
+.snap:hover{transform:rotate(0) translateY(-8px) scale(1.04);box-shadow:0 20px 36px rgba(138,106,71,.26)}
+.snap img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.snap figcaption{padding:.5rem 0 .45rem;text-align:center;font-family:var(--serif);font-size:.72rem;color:var(--brown)}
 
-        /* ===== BODY ===== */
-        body {
-            font-family: 'Quicksand', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
-            padding: 1.5rem 1rem;
-            position: relative;
-            overflow-x: hidden;
-            transition: background 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+/* links */
+.links{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.links a{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:1rem .3rem;text-decoration:none;background:#fff;border:1.5px solid var(--line);border-radius:50% 50% 1.2rem 1.2rem / 40% 40% 1.2rem 1.2rem;font-size:1.25rem;color:var(--ink-soft);transition:transform .6s var(--ease),color .5s,border-color .5s,box-shadow .6s var(--ease)}
+.links a span{font-size:.7rem;font-weight:700}
+.links a:hover{transform:translateY(-6px);border-color:currentColor;box-shadow:0 14px 24px rgba(77,122,88,.14)}
+.links .wa:hover{color:#2fb867}.links .ig:hover{color:#d8508a}.links .tg:hover{color:#2a9bd4}.links .sw:hover{color:#e96b83}
 
-        /* ===== SPARKLE (PELAN-PELAN) ===== */
-        .sparkle-container {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .sparkle {
-            position: absolute;
-            border-radius: 50%;
-            animation: sparkleRandom 8s ease-in-out infinite alternate;
-            opacity: 0.15;
-        }
-        .sparkle:nth-child(1n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
-        .sparkle:nth-child(2n) { background: var(--accent); box-shadow: 0 0 18px var(--accent); }
-        .sparkle:nth-child(3n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
-        .sparkle:nth-child(4n) { background: var(--accent-light); box-shadow: 0 0 18px var(--accent-light); }
-        .sparkle:nth-child(5n) { background: var(--text-primary); box-shadow: 0 0 18px var(--text-primary); }
+/* footer */
+footer{position:relative;margin-top:4rem;background:#e3eedb;color:var(--ink)}
+.wave{position:absolute;left:0;right:0;top:-1px;transform:translateY(-99%);line-height:0}
+.wave svg{display:block;width:100%;height:46px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1.8rem;padding:2.2rem 0 1.6rem}
+.foot-brand h4{font-family:var(--serif);font-size:1.3rem;display:flex;align-items:center;gap:.5rem}
+.foot-brand h4 i{color:var(--leaf-deep)}
+.foot-brand p{font-size:.85rem;color:#5b6d57;margin-top:.5rem;font-weight:500}
+.foot-col h5{font-family:var(--serif);font-size:.95rem;margin-bottom:.6rem}
+.foot-col a{display:block;font-size:.82rem;font-weight:500;color:#5b6d57;text-decoration:none;padding:.18rem 0;transition:color .4s,transform .5s var(--ease)}
+.foot-col a:hover{color:var(--leaf-deep);transform:translateX(5px)}
+.foot-wish{text-align:center;font-family:var(--serif);font-size:.95rem;color:var(--brown);padding:1.2rem 0;border-top:1px solid rgba(77,122,88,.2)}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0 1.6rem;font-size:.74rem;font-weight:500;color:#6c7d68}
+.up{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:var(--leaf-deep);color:#fff;font-size:.8rem;transition:transform .6s var(--ease)}
+.up:hover{transform:translateY(-5px)}
 
-        @keyframes sparkleRandom {
-            0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0.05; }
-            25% { transform: translate(40px, -30px) scale(1.0) rotate(90deg); opacity: 0.3; }
-            50% { transform: translate(-20px, 50px) scale(0.4) rotate(180deg); opacity: 0.15; }
-            75% { transform: translate(50px, 20px) scale(0.8) rotate(270deg); opacity: 0.25; }
-            100% { transform: translate(-30px, -40px) scale(0.3) rotate(360deg); opacity: 0.05; }
-        }
-
-        /* ===== HIASAN ===== */
-        .deco {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 2.4rem;
-            opacity: 0.08;
-            animation: floatDeco 16s ease-in-out infinite alternate;
-        }
-        .deco:nth-child(2) { top: 3%; left: 2%; font-size: 3rem; animation-duration: 18s; }
-        .deco:nth-child(3) { top: 5%; right: 3%; font-size: 2.2rem; animation-duration: 14s; animation-delay: 1s; }
-        .deco:nth-child(4) { top: 48%; left: 1.5%; font-size: 2.6rem; animation-duration: 20s; animation-delay: 0.5s; }
-        .deco:nth-child(5) { top: 42%; right: 2%; font-size: 2rem; animation-duration: 15s; animation-delay: 2s; }
-        .deco:nth-child(6) { bottom: 5%; left: 2%; font-size: 3.4rem; animation-duration: 22s; animation-delay: 0.8s; }
-        .deco:nth-child(7) { bottom: 7%; right: 3%; font-size: 2.6rem; animation-duration: 17s; animation-delay: 1.5s; }
-        .deco:nth-child(8) { bottom: 2%; left: 50%; transform: translateX(-50%); font-size: 2.8rem; animation-duration: 24s; animation-delay: 2.2s; }
-        .deco:nth-child(9) { top: 18%; left: 50%; transform: translateX(-50%); font-size: 1.8rem; animation-duration: 19s; animation-delay: 1s; }
-        .deco:nth-child(10) { top: 75%; left: 6%; font-size: 2rem; animation-duration: 21s; animation-delay: 0.3s; }
-        .deco:nth-child(11) { top: 70%; right: 5%; font-size: 2.2rem; animation-duration: 16s; animation-delay: 1.8s; }
-        .deco:nth-child(12) { top: 28%; left: 5%; font-size: 1.8rem; animation-duration: 23s; animation-delay: 0.6s; }
-        .deco:nth-child(13) { top: 24%; right: 4%; font-size: 2rem; animation-duration: 18s; animation-delay: 2.5s; }
-        .deco:nth-child(14) { top: 12%; left: 10%; font-size: 2rem; animation-duration: 20s; animation-delay: 1.2s; }
-        .deco:nth-child(15) { bottom: 18%; left: 8%; font-size: 2.2rem; animation-duration: 22s; animation-delay: 0.9s; }
-        .deco:nth-child(16) { bottom: 20%; right: 7%; font-size: 2.4rem; animation-duration: 19s; animation-delay: 1.6s; }
-        .deco:nth-child(17) { top: 35%; left: 3%; font-size: 1.8rem; animation-duration: 25s; animation-delay: 0.4s; }
-        .deco:nth-child(18) { top: 38%; right: 3%; font-size: 2rem; animation-duration: 21s; animation-delay: 2.1s; }
-        .deco:nth-child(19) { top: 55%; left: 50%; transform: translateX(-50%); font-size: 1.8rem; animation-duration: 23s; animation-delay: 1.4s; }
-        .deco:nth-child(20) { bottom: 30%; left: 50%; transform: translateX(-50%); font-size: 2rem; animation-duration: 20s; animation-delay: 0.7s; }
-        .deco:nth-child(21) { top: 8%; left: 20%; font-size: 2rem; animation-duration: 17s; animation-delay: 0.2s; }
-        .deco:nth-child(22) { bottom: 12%; right: 12%; font-size: 2.2rem; animation-duration: 19s; animation-delay: 1.1s; }
-        .deco:nth-child(23) { top: 60%; left: 4%; font-size: 1.6rem; animation-duration: 21s; animation-delay: 0.9s; }
-        .deco:nth-child(24) { bottom: 40%; right: 4%; font-size: 1.8rem; animation-duration: 18s; animation-delay: 1.7s; }
-        .deco:nth-child(25) { top: 15%; left: 12%; font-size: 1.6rem; animation-duration: 20s; animation-delay: 0.3s; }
-        .deco:nth-child(26) { bottom: 15%; right: 10%; font-size: 1.8rem; animation-duration: 22s; animation-delay: 1.3s; }
-
-        @keyframes floatDeco {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            100% { transform: translate(40px, -50px) rotate(22deg) scale(1.12); }
-        }
-
-        /* ===== KONTEN ===== */
-        .content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 440px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header-about {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 3px;
-            background: var(--glass-bg);
-            padding: 0.3rem 2rem;
-            border-radius: 3rem;
-            border: 1px solid var(--glass-border);
-            margin-bottom: 0.6rem;
-            backdrop-filter: blur(4px);
-            text-align: center;
-        }
-        .header-about i {
-            color: var(--accent-light);
-            margin-right: 6px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--glass-border);
-            box-shadow: 0 8px 30px var(--shadow);
-            margin-bottom: 0.4rem;
-        }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .username {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.05rem;
-        }
-        .username span {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .bio-tag {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.6rem;
-            display: flex;
-            gap: 0.6rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .bio-tag span {
-            background: var(--glass-bg);
-            padding: 0.1rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(4px);
-        }
-
-        /* ===== MUSIC WIDGET ===== */
-        .music-widget {
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem 1rem 2rem 1rem;
-            padding: 0.8rem 1.2rem;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.6rem;
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-        .music-widget:hover {
-            background: var(--glass-hover);
-            border-color: var(--glass-border-hover);
-        }
-
-        .music-logo {
-            flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--glass-border);
-            box-shadow: 0 4px 12px var(--shadow);
-            animation: spinLogo 8s linear infinite;
-        }
-        .music-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        @keyframes spinLogo {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .music-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .music-info .title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .music-info .artist {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-        .music-info .song-title {
-            font-size: 0.7rem;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .music-status {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            opacity: 0.4;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-        .music-status .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #25d366;
-            animation: pulseDot 1.5s ease-in-out infinite;
-        }
-        @keyframes pulseDot {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* ===== WIDGET KECIL ===== */
-        .widget-grid {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-            margin-bottom: 0.6rem;
-        }
-        .widget-mini {
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
-            padding: 0.5rem 0.2rem;
-            border: 1px solid var(--glass-border);
-            text-align: center;
-            box-shadow: 0 2px 12px var(--shadow);
-        }
-        .widget-mini:hover {
-            background: var(--glass-hover);
-            transform: translateY(-3px);
-        }
-        .widget-mini .icon {
-            font-size: 1.2rem;
-            color: var(--accent-light);
-        }
-        .widget-mini .value {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-top: 0.1rem;
-            line-height: 1.2;
-        }
-        .widget-mini .label {
-            font-size: 0.45rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            opacity: 0.4;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== CAROUSEL ===== */
-        .carousel {
-            overflow: hidden;
-            border-radius: 1.8rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            min-height: 115px;
-            width: 100%;
-            backdrop-filter: blur(4px);
-            margin-bottom: 0.5rem;
-        }
-        .slides {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .slide {
-            min-width: 100%;
-            padding: 1rem 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-size: 0.9rem;
-            font-weight: 400;
-            min-height: 105px;
-        }
-        .slide h4 {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.2rem;
-        }
-        .slide .emoji-big {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 0.1rem;
-        }
-        .slide i {
-            color: var(--accent-light);
-            margin: 0 4px;
-        }
-
-        .carousel-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-        .carousel-nav button {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.75rem;
-        }
-        .carousel-nav button:hover {
-            background: var(--glass-hover);
-            border-color: var(--glass-border-hover);
-        }
-        .indicators {
-            display: flex;
-            gap: 0.4rem;
-        }
-        .indicators button {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: none;
-            background: var(--glass-border);
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 0;
-        }
-        .indicators button.active {
-            background: var(--accent);
-            width: 22px;
-            border-radius: 4px;
-            box-shadow: 0 0 16px var(--accent);
-        }
-
-        .quote {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--text-secondary);
-            text-align: center;
-            margin: 0.2rem 0 0.2rem;
-            opacity: 0.75;
-            font-style: italic;
-            line-height: 1.6;
-        }
-        .quote i {
-            color: var(--accent-light);
-            margin: 0 4px;
-            opacity: 0.6;
-        }
-
-        .bottom-links {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.8rem;
-            margin: 0.4rem 0 0.6rem;
-            flex-wrap: wrap;
-        }
-        .bottom-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            transition: all 0.25s ease;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .bottom-link span {
-            font-size: 0.75rem;
-            font-weight: 400;
-        }
-        .bottom-link:hover {
-            color: var(--text-primary);
-            transform: translateY(-3px);
-        }
-        .bottom-link.wa:hover { color: #25d366; }
-        .bottom-link.ig:hover { color: #C5D5DE; }
-        .bottom-link.tg:hover { color: #A3B8C0; }
-        .bottom-link.saweria:hover { color: #C5D5DE; }
-
-        /* ===== PHOTO GRID ===== */
-        .photo-grid {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.6rem;
-            margin-top: 0.4rem;
-        }
-        .photo-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
-            overflow: hidden;
-            border: 1.5px solid var(--glass-border);
-            box-shadow: 0 4px 20px var(--shadow), 
-                        inset 0 1px 0 rgba(255,255,255,0.05);
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-        .photo-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 1.5rem 0.8rem 1.5rem 0.8rem;
-            padding: 1.5px;
-            background: linear-gradient(135deg, 
-                var(--glass-border-hover) 0%, 
-                var(--glass-border) 50%, 
-                var(--glass-border-hover) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0.6;
-            transition: opacity 0.4s ease;
-        }
-        .photo-card:hover::before {
-            opacity: 1;
-        }
-        .photo-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            background: var(--glass-hover);
-            border-color: var(--glass-border-hover);
-            box-shadow: 0 12px 40px var(--shadow), 0 0 30px var(--glass-border-hover);
-        }
-        .photo-card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            display: block;
-            border-radius: 1.5rem 0.8rem 0 0;
-        }
-        .photo-card .caption {
-            padding: 0.6rem 0.6rem 0.7rem;
-            font-size: 0.6rem;
-            font-weight: 400;
-            color: var(--text-secondary);
-            text-align: center;
-            opacity: 0.75;
-            background: rgba(255,255,255,0.02);
-            letter-spacing: 0.3px;
-            line-height: 1.4;
-            border-top: 1px solid var(--glass-border);
-        }
-        .photo-card .caption i {
-            color: var(--accent-light);
-            margin-right: 4px;
-            font-size: 0.55rem;
-        }
-
-        .footer-note {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.6rem;
-            margin-top: 0.8rem;
-            opacity: 0.4;
-            letter-spacing: 1px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 480px) {
-            .avatar { width: 80px; height: 80px; }
-            .username { font-size: 1.5rem; }
-            .header-about { font-size: 0.75rem; padding: 0.15rem 1.2rem; }
-            .slide { font-size: 0.8rem; padding: 0.8rem 1rem; min-height: 95px; }
-            .carousel { min-height: 95px; }
-            .carousel-nav button { width: 28px; height: 28px; font-size: 0.65rem; }
-            .bottom-link { font-size: 1rem; gap: 0.2rem; }
-            .bottom-link span { font-size: 0.65rem; }
-            .quote { font-size: 0.75rem; }
-            .deco { display: none; }
-            .sparkle { width: 3px !important; height: 3px !important; }
-            .loader-dots span { width: 10px; height: 10px; gap: 8px; }
-            .widget-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
-            .music-widget { padding: 0.6rem 0.8rem; }
-            .music-logo { width: 40px; height: 40px; }
-            .music-info .title { font-size: 0.75rem; }
-            .photo-grid { gap: 0.4rem; }
-            .photo-card { border-radius: 1.2rem 0.6rem 1.2rem 0.6rem; }
-            .photo-card .caption { font-size: 0.5rem; padding: 0.4rem 0.3rem 0.5rem; }
-            .photo-card::before { border-radius: 1.2rem 0.6rem 1.2rem 0.6rem; }
-        }
-        @media (max-width: 380px) {
-            .widget-grid { grid-template-columns: repeat(2, 1fr); }
-            .widget-mini { padding: 0.3rem 0.1rem; }
-            .widget-mini .icon { font-size: 1rem; }
-            .widget-mini .value { font-size: 0.55rem; }
-            .bottom-links { gap: 1rem; }
-            .photo-grid { gap: 0.3rem; }
-            .photo-card .caption { font-size: 0.45rem; padding: 0.3rem 0.2rem 0.4rem; }
-        }
-    </style>
+@media (max-width:480px){
+  .wrap{padding:0 1.1rem}
+  .username{font-size:1.8rem}
+  .clock{display:none}
+  .glance{grid-template-columns:repeat(2,1fr)}
+  .glance div:nth-child(2){border-right:none}
+  .glance div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .player{flex-wrap:wrap}
+  .snaps{gap:.7rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.js .rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 
-    <div id="loading">
-        <div class="loader-dots">
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="loading-text">✦ menata ✦</div>
+<div id="loading"><div class="seed"></div><div class="loading-text">angin sedang berbisik…</div></div>
+<audio id="bgMusic"></audio>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#"><i class="fas fa-leaf"></i>radipgtg</a>
+    <label class="search">
+      <i class="fas fa-magnifying-glass"></i>
+      <span class="host">radipgtg.biz.id/</span>
+      <input id="q" type="search" placeholder="cari cerita…" autocomplete="off" />
+    </label>
+    <span class="clock" id="clockDisplay">--:--</span>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="scene" viewBox="0 0 800 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="sg"><stop offset="0" stop-color="#fff6d6"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
+      <g id="cl"><ellipse cx="0" cy="0" rx="62" ry="20" fill="#fff"/><ellipse cx="-34" cy="8" rx="38" ry="14" fill="#fff"/><ellipse cx="38" cy="8" rx="44" ry="15" fill="#fff"/><ellipse cx="6" cy="-14" rx="32" ry="16" fill="#fff"/></g>
+    </defs>
+    <circle class="sun" cx="640" cy="90" r="110" fill="url(#sg)"/>
+    <circle cx="640" cy="90" r="30" fill="#fff3c4"/>
+    <g class="cloud" opacity=".95"><use href="#cl" x="0" y="70"/></g>
+    <g class="cloud c2" opacity=".8"><use href="#cl" x="0" y="130" transform="scale(.7)"/></g>
+    <g class="cloud c3" opacity=".9"><use href="#cl" x="0" y="40" transform="scale(.55)"/></g>
+    <path d="M0 230 C120 170 220 200 330 180 C450 158 540 200 660 175 C730 160 770 170 800 176 V300 H0Z" fill="#cfe3c4"/>
+    <path d="M0 262 C100 222 210 250 320 232 C450 212 560 258 680 236 C740 226 780 232 800 236 V300 H0Z" fill="#b6d3a8"/>
+    <path d="M0 292 C140 268 260 286 400 274 C540 262 680 288 800 272 V300 H0Z" fill="#a1c692"/>
+  </svg>
+  <div class="wrap hero-body">
+    <div class="avatar"><img src="https://files.catbox.moe/au2cau.jpg" alt="radipgtg" /></div>
+    <h1 class="username">radip<span>gtg</span></h1>
+    <div class="role"><i class="fas fa-crown"></i> Owner Totoro AI</div>
+    <div class="whisper" id="whisper">
+      <p class="on">Angin musim panas membawaku pulang ke tempat yang hangat.</p>
+      <p>Di bawah pohon kapur barus, selalu ada cerita yang menunggu.</p>
+      <p>Langit hari ini sebiru mimpi yang belum selesai.</p>
+      <p>Hujan pelan, payung kecil, dan teman yang setia menunggu.</p>
     </div>
+  </div>
+</section>
 
-    <div class="sparkle-container" id="sparkleContainer"></div>
-    <script>
-        (function() {
-            const c = document.getElementById('sparkleContainer');
-            for (let i = 0; i < 160; i++) {
-                const s = document.createElement('div');
-                s.className = 'sparkle';
-                const size = 2 + Math.random() * 8;
-                s.style.width = size + 'px';
-                s.style.height = size + 'px';
-                s.style.left = Math.random() * 100 + '%';
-                s.style.top = Math.random() * 100 + '%';
-                s.style.animationDelay = (Math.random() * 8) + 's';
-                s.style.animationDuration = (7 + Math.random() * 5) + 's';
-                c.appendChild(s);
-            }
-        })();
-    </script>
+<main class="wrap">
 
-    <div class="deco" style="top:3%; left:2%;">🌊</div>
-    <div class="deco" style="top:5%; right:3%;">🌙</div>
-    <div class="deco" style="top:48%; left:1.5%;">⭐</div>
-    <div class="deco" style="top:42%; right:2%;">🌿</div>
-    <div class="deco" style="bottom:5%; left:2%;">🌺</div>
-    <div class="deco" style="bottom:7%; right:3%;">🍃</div>
-    <div class="deco" style="bottom:2%; left:50%; transform:translateX(-50%);">🪷</div>
-    <div class="deco" style="top:18%; left:50%; transform:translateX(-50%);">☘️</div>
-    <div class="deco" style="top:75%; left:6%;">🌱</div>
-    <div class="deco" style="top:70%; right:5%;">🌿</div>
-    <div class="deco" style="top:28%; left:5%;">🍀</div>
-    <div class="deco" style="top:24%; right:4%;">🌸</div>
-    <div class="deco" style="top:12%; left:10%;">🌼</div>
-    <div class="deco" style="bottom:18%; left:8%;">🌷</div>
-    <div class="deco" style="bottom:20%; right:7%;">🌻</div>
-    <div class="deco" style="top:35%; left:3%;">✨</div>
-    <div class="deco" style="top:38%; right:3%;">💫</div>
-    <div class="deco" style="top:55%; left:50%; transform:translateX(-50%);">🌊</div>
-    <div class="deco" style="bottom:30%; left:50%; transform:translateX(-50%);">🌙</div>
-    <div class="deco" style="top:8%; left:20%;">🪸</div>
-    <div class="deco" style="bottom:12%; right:12%;">🌸</div>
-    <div class="deco" style="top:60%; left:4%;">🍀</div>
-    <div class="deco" style="bottom:40%; right:4%;">🌺</div>
-    <div class="deco" style="top:45%; left:50%; transform:translateX(-50%); font-size:1.6rem;">🕊️</div>
-    <div class="deco" style="top:15%; left:12%; font-size:1.6rem;">🌻</div>
-    <div class="deco" style="bottom:15%; right:10%; font-size:1.8rem;">🌺</div>
-
-    <audio id="bgMusic" autoplay></audio>
-    <div class="content">
-
-        <div class="header-about">
-            <i class="fas fa-water"></i> About Me
-        </div>
-
-        <div class="avatar">
-            <img src="https://files.catbox.moe/au2cau.jpg" alt="radipgtg" />
-        </div>
-
-        <div class="username">radip<span>gtg</span></div>
-        <div class="bio-tag">
-            <span>✨ 24/7</span>
-            <span>🍄 South korea</span>
-            <span>⭐ orang ganteng</span>
-        </div>
-
-        <div class="music-widget">
-            <div class="music-logo">
-                <img src="https://files.catbox.moe/tldoet.jpg" alt="music logo" />
-            </div>
-            <div class="music-info">
-                <div class="title" id="nowPlaying">🎵 Sedang diputar</div>
-                <div class="artist">Wave to earth</div>
-                <div class="song-title" id="songTitle">— Seasons</div>
-            </div>
-            <div class="music-status">
-                <span class="dot"></span>
-                <span>LIVE</span>
-            </div>
-        </div>
-
-        <div class="widget-grid">
-            <div class="widget-mini">
-                <div class="icon"><i class="fas fa-clock"></i></div>
-                <div class="value" id="clockDisplay">--:--</div>
-                <div class="label">Waktu</div>
-            </div>
-            <div class="widget-mini">
-                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="value">🇮🇩 ID</div>
-                <div class="label">Lokasi</div>
-            </div>
-            <div class="widget-mini">
-                <div class="icon"><i class="fas fa-smile"></i></div>
-                <div class="value">💫Happy</div>
-                <div class="label">Mood</div>
-            </div>
-            <div class="widget-mini">
-                <div class="icon"><i class="fas fa-wifi"></i></div>
-                <div class="value">💚 Online</div>
-                <div class="label">Status</div>
-            </div>
-        </div>
-        
-        <div class="carousel">
-            <div class="slides" id="slides">
-                <div class="slide">
-                    <span class="emoji-big">🌱</span>
-                    <h4>Tentang Aku</h4>
-                    <p>Halo! aku Radipgtg 16yo, Wave to Earth has been on repeat 24/7. #NEWJEANS 5 — Orang tertampan di dunia bahkan ngalahin idol kalian semuaa💖</p>
-                </div>
-                <div class="slide">
-                    <span class="emoji-big">🎨</span>
-                    <h4>Hobi</h4>
-                    <p><i class="fas fa-utensils"></i> Makan · <i class="fas fa-tv"></i> Nonton · <i class="fas fa-mug-hot"></i> Tidur</p>
-                </div>
-                <div class="slide">
-                    <span class="emoji-big">✨</span>
-                    <h4>Motto</h4>
-                    <p>“Ga ada motto, aku mau tidur” — Radipgtg</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-nav">
-            <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-            <div class="indicators" id="indicators">
-                <button class="active" data-index="0"></button>
-                <button data-index="1"></button>
-                <button data-index="2"></button>
-            </div>
-            <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-
-        <div class="quote">
-            <i class="fas fa-quote-left"></i> 
-            "Hidup ini bukan matematika. Tidak ada jawaban pasti, dan kita hanya perlu menjalaninya sebaik mungkin." – Hong Du-sik 
-            <i class="fas fa-quote-right"></i>
-        </div>
-
-        <div class="bottom-links">
-            <a href="https://wa.me/6285711170694" target="_blank" class="bottom-link wa">
-                <i class="fab fa-whatsapp"></i> <span>WA</span>
-            </a>
-            <a href="https://instagram.com/radipppppp" target="_blank" class="bottom-link ig">
-                <i class="fab fa-instagram"></i> <span>IG</span>
-            </a>
-            <a href="https://t.me/radipgtg" target="_blank" class="bottom-link tg">
-                <i class="fab fa-telegram-plane"></i> <span>Tele</span>
-            </a>
-            <a href="https://saweria.co/radipgtg" target="_blank" class="bottom-link saweria">
-                <i class="fas fa-heart"></i> <span>Saweria</span>
-            </a>
-        </div>
-
-        <div class="photo-grid">
-            <div class="photo-card">
-                <img src="https://files.catbox.moe/tgoar2.jpg" alt="foto 1" />
-                <div class="caption">
-                    <i class="fas fa-camera"></i> Radipgtg #1
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="https://files.catbox.moe/wtfrpk.jpg" alt="foto 2" />
-                <div class="caption">
-                    <i class="fas fa-camera"></i> Radipgtg #2
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="https://files.catbox.moe/vpkx3b.jpg" alt="foto 3" />
-                <div class="caption">
-                    <i class="fas fa-camera"></i> Radipgtg #3
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-note">
-            ✦ dibuat dengan cinta & semangat — radipgtg ✦
-        </div>
-
+  <section class="chap" data-k="tentang aku profil radipgtg tag south korea ganteng waktu lokasi mood status">
+    <div class="chap-title rv"><small>Bab 1</small><h2>Tentang Aku</h2></div>
+    <p class="lede rv">Seorang yang suka lagu pelan, nonton, makan, dan tidur siang di bawah pohon rindang.</p>
+    <div class="tags rv"><span>✨ 24/7</span><span>🍄 South korea</span><span>⭐ orang ganteng</span></div>
+    <div class="glance rv">
+      <div><i class="fas fa-clock"></i><b id="clock2">--:--</b><small>Waktu</small></div>
+      <div><i class="fas fa-map-pin"></i><b>🇮🇩 ID</b><small>Lokasi</small></div>
+      <div><i class="fas fa-face-smile"></i><b>💫 Happy</b><small>Mood</small></div>
+      <div><i class="fas fa-wifi"></i><b>💚 Online</b><small>Status</small></div>
     </div>
-    <script>
-        
-        const playlist = [
-            { src: 'https://files.catbox.moe/b1oxyb.mp3', title: 'Seasons', artist: 'Wave to earth' },
-            { src: 'https://files.catbox.moe/16vvou.mp3', title: 'Bad', artist: 'Wave to earth' },
-            { src: 'https://files.catbox.moe/sybkg3.mp3', title: 'Love', artist: 'Wave to earth' }
-        ];
+  </section>
 
-        let currentSongIndex = 0;
-        const audio = document.getElementById('bgMusic');
-        const nowPlayingEl = document.getElementById('nowPlaying');
-        const songTitleEl = document.getElementById('songTitle');
+  <section class="chap" id="totoro" data-k="totoro ai bot website owner developer totoroai.my.id">
+    <div class="chap-title rv"><small>Bab 2</small><h2>Halte Totoro</h2></div>
+    <div class="stop rv">
+      <div class="stop-sign"><i class="fas fa-bus-simple"></i> Halte Totoro AI</div>
+      <h3>Hujan turun pelan, Totoro menunggu di halte.</h3>
+      <p>Totoro AI adalah bot buatanku. Singgahlah sebentar, lihat fitur dan layanannya di website resminya.</p>
+      <div class="owner"><i class="fas fa-user-check"></i> Owner &amp; developer: radipgtg</div>
+      <a class="cta" href="https://totoroai.my.id" target="_blank" rel="noopener">
+        <span><i class="fas fa-globe"></i> Kunjungi totoroai.my.id</span>
+        <div class="go"><i class="fas fa-arrow-right"></i></div>
+      </a>
+    </div>
+  </section>
 
-        function loadSong(index) {
-            const song = playlist[index];
-            audio.src = song.src;
-            audio.load();
-            audio.play().catch(() => {});
-            nowPlayingEl.textContent = '🎵 Sedang diputar';
-            songTitleEl.textContent = '— ' + song.title;
-        }
+  <section class="chap" data-k="musik lagu wave to earth seasons bad love putar">
+    <div class="chap-title rv"><small>Bab 3</small><h2>Lagu Hari Ini</h2></div>
+    <div class="player rv" id="player">
+      <div class="disc"><img src="https://files.catbox.moe/tldoet.jpg" alt="cover" /></div>
+      <div class="p-info">
+        <small id="nowPlaying">🎵 Sedang diputar</small>
+        <h4 id="songTitle">Seasons</h4>
+        <span>Wave to earth</span>
+        <div class="bar"><i id="prog"></i></div>
+      </div>
+      <div class="ctrl">
+        <button class="main" id="playBtn" aria-label="Putar"><i class="fas fa-play"></i></button>
+        <button id="skipBtn" aria-label="Lagu berikutnya"><i class="fas fa-forward-step"></i></button>
+      </div>
+    </div>
+  </section>
 
-        audio.addEventListener('ended', function() {
-            currentSongIndex = (currentSongIndex + 1) % playlist.length;
-            loadSong(currentSongIndex);
-        });
+  <section class="chap" data-k="hobi motto cerita makan nonton tidur">
+    <div class="chap-title rv"><small>Bab 4</small><h2>Lembar Cerita</h2></div>
+    <div class="book rv">
+      <div class="book-view">
+        <div class="slides" id="slides">
+          <div class="slide"><span class="em">🌱</span><h4>Tentang Aku</h4><p>Halo! aku Radipgtg 16yo, Wave to Earth has been on repeat 24/7. #NEWJEANS 5 — Orang tertampan di dunia bahkan ngalahin idol kalian semuaa💖</p></div>
+          <div class="slide"><span class="em">🎨</span><h4>Hobi</h4><p><i class="fas fa-utensils"></i> Makan · <i class="fas fa-tv"></i> Nonton · <i class="fas fa-mug-hot"></i> Tidur</p></div>
+          <div class="slide"><span class="em">✨</span><h4>Motto</h4><p>“Ga ada motto, aku mau tidur” — Radipgtg</p></div>
+        </div>
+      </div>
+      <div class="book-nav">
+        <button class="arrow" id="prevBtn" aria-label="Sebelumnya"><i class="fas fa-chevron-left"></i></button>
+        <div class="dots" id="dots"><button class="active" data-i="0" aria-label="Lembar 1"></button><button data-i="1" aria-label="Lembar 2"></button><button data-i="2" aria-label="Lembar 3"></button></div>
+        <button class="arrow" id="nextBtn" aria-label="Berikutnya"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
 
-        loadSong(0);
+  <section class="chap" data-k="quote kutipan hong du-sik hidup">
+    <div class="quote rv">
+      <div class="mark">“</div>
+      <p>Hidup ini bukan matematika. Tidak ada jawaban pasti, dan kita hanya perlu menjalaninya sebaik mungkin.</p>
+      <cite>— Hong Du-sik</cite>
+    </div>
+  </section>
 
-        document.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().catch(() => {});
-            }
-        }, { once: true });
+  <section class="chap" data-k="foto galeri radipgtg">
+    <div class="chap-title rv"><small>Bab 5</small><h2>Kenangan</h2></div>
+    <div class="snaps rv">
+      <figure class="snap" style="--r:-3deg"><img src="https://files.catbox.moe/tgoar2.jpg" alt="foto 1" /><figcaption>Radipgtg #1</figcaption></figure>
+      <figure class="snap" style="--r:2deg"><img src="https://files.catbox.moe/wtfrpk.jpg" alt="foto 2" /><figcaption>Radipgtg #2</figcaption></figure>
+      <figure class="snap" style="--r:-1.5deg"><img src="https://files.catbox.moe/vpkx3b.jpg" alt="foto 3" /><figcaption>Radipgtg #3</figcaption></figure>
+    </div>
+  </section>
 
-        const themes = [
-            'theme-ocean',
-            'theme-peach',
-            'theme-mint',
-            'theme-candy',
-            'theme-lavender'
-        ];
+  <section class="chap" data-k="sosial media wa whatsapp ig instagram telegram saweria kontak">
+    <div class="chap-title rv"><small>Bab 6</small><h2>Temui Aku</h2></div>
+    <div class="links rv">
+      <a class="wa" href="https://wa.me/6285711170694" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span>WA</span></a>
+      <a class="ig" href="https://instagram.com/radipppppp" target="_blank" rel="noopener"><i class="fab fa-instagram"></i><span>IG</span></a>
+      <a class="tg" href="https://t.me/radipgtg" target="_blank" rel="noopener"><i class="fab fa-telegram-plane"></i><span>Tele</span></a>
+      <a class="sw" href="https://saweria.co/radipgtg" target="_blank" rel="noopener"><i class="fas fa-heart"></i><span>Saweria</span></a>
+    </div>
+  </section>
 
-        let currentThemeIndex = 0;
+</main>
 
-        function changeTheme() {
-       
-            themes.forEach(t => document.documentElement.classList.remove(t));
-           
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            document.documentElement.classList.add(themes[currentThemeIndex]);
-        }
+<footer>
+  <div class="wave"><svg viewBox="0 0 800 46" preserveAspectRatio="none"><path d="M0 46 V24 C100 4 180 4 280 22 C380 40 460 40 560 20 C650 2 730 6 800 24 V46Z" fill="#e3eedb"/></svg></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h4><i class="fas fa-leaf"></i>radipgtg</h4>
+        <p>Owner Totoro AI. Tempat kecil di internet untuk lagu pelan, cerita sederhana, dan hari yang tenang.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Singgah ke</h5>
+        <a href="https://totoroai.my.id" target="_blank" rel="noopener">totoroai.my.id</a>
+        <a href="https://instagram.com/radipppppp" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://t.me/radipgtg" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://saweria.co/radipgtg" target="_blank" rel="noopener">Saweria</a>
+      </div>
+    </div>
+    <p class="foot-wish">Terima kasih sudah singgah. Semoga angin selalu baik padamu. 🍃</p>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> radipgtg.biz.id</span>
+      <button class="up" id="upBtn" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
 
-        setInterval(changeTheme, 15000);
+<script>
+const $=id=>document.getElementById(id);
 
-        document.documentElement.classList.add('theme-ocean');
+/* musik */
+const playlist=[
+  {src:'https://files.catbox.moe/b1oxyb.mp3',title:'Seasons'},
+  {src:'https://files.catbox.moe/16vvou.mp3',title:'Bad'},
+  {src:'https://files.catbox.moe/sybkg3.mp3',title:'Love'}
+];
+let song=0;
+const audio=$('bgMusic'),player=$('player'),playBtn=$('playBtn');
+function load(i,play=true){
+  audio.src=playlist[i].src;audio.load();
+  $('songTitle').textContent=playlist[i].title;
+  $('prog').style.width='0';
+  if(play)audio.play().catch(()=>{});
+}
+audio.addEventListener('play',()=>{player.classList.add('playing');playBtn.innerHTML='<i class="fas fa-pause"></i>'});
+audio.addEventListener('pause',()=>{player.classList.remove('playing');playBtn.innerHTML='<i class="fas fa-play"></i>'});
+audio.addEventListener('ended',()=>{song=(song+1)%playlist.length;load(song)});
+audio.addEventListener('timeupdate',()=>{if(audio.duration)$('prog').style.width=(audio.currentTime/audio.duration*100)+'%'});
+playBtn.onclick=()=>audio.paused?audio.play().catch(()=>{}):audio.pause();
+$('skipBtn').onclick=()=>{song=(song+1)%playlist.length;load(song)};
+load(0);
+document.addEventListener('click',()=>{if(audio.paused&&!audio.ended&&audio.currentTime===0)audio.play().catch(()=>{})},{once:true});
 
-        const slides = document.getElementById('slides');
-        const indicators = document.querySelectorAll('.indicators button');
-        const prev = document.getElementById('prevBtn');
-        const next = document.getElementById('nextBtn');
-        let current = 0;
-        const total = 3;
-        let moving = false;
+/* carousel */
+const slides=$('slides'),dots=document.querySelectorAll('#dots button');
+let cur=0,busy=false;
+function go(i){
+  if(busy)return;
+  cur=(i+3)%3;busy=true;
+  slides.style.transform=`translateX(-${cur*100}%)`;
+  dots.forEach((d,k)=>d.classList.toggle('active',k===cur));
+  setTimeout(()=>busy=false,700);
+}
+$('prevBtn').onclick=()=>go(cur-1);
+$('nextBtn').onclick=()=>go(cur+1);
+dots.forEach(d=>d.onclick=()=>go(+d.dataset.i));
+let sx=0;const bv=document.querySelector('.book-view');
+bv.addEventListener('touchstart',e=>sx=e.changedTouches[0].screenX);
+bv.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].screenX;if(Math.abs(d)>40)go(d>0?cur+1:cur-1)});
 
-        function goTo(i) {
-            if (moving) return;
-            if (i < 0) i = total - 1;
-            if (i >= total) i = 0;
-            moving = true;
-            current = i;
-            slides.style.transform = `translateX(-${current * 100}%)`;
-            indicators.forEach((btn, idx) => btn.classList.toggle('active', idx === current));
-            setTimeout(() => moving = false, 500);
-        }
+/* kalimat berganti */
+const ws=document.querySelectorAll('#whisper p');let wi=0;
+setInterval(()=>{ws[wi].classList.remove('on');wi=(wi+1)%ws.length;ws[wi].classList.add('on')},5200);
 
-        prev.addEventListener('click', () => goTo(current - 1));
-        next.addEventListener('click', () => goTo(current + 1));
-        indicators.forEach(btn => btn.addEventListener('click', () => goTo(parseInt(btn.dataset.index))));
+/* muncul pelan saat scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*90+'ms';io.observe(el)});
 
-        // Swipe
-        let startX = 0;
-        const carousel = document.querySelector('.carousel');
-        carousel.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
-        carousel.addEventListener('touchend', e => {
-            const diff = startX - e.changedTouches[0].screenX;
-            if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
-        });
+/* header */
+const top_=$('top');
+addEventListener('scroll',()=>top_.classList.toggle('scrolled',scrollY>10),{passive:true});
+$('upBtn').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hide');
-            }, 1800);
-        });
+/* pencarian */
+const chaps=[...document.querySelectorAll('.chap')];
+const q=$('q');
+function find(){
+  const v=q.value.trim().toLowerCase();
+  let first=null;
+  chaps.forEach(c=>{
+    const hit=!v||c.dataset.k.toLowerCase().includes(v)||c.textContent.toLowerCase().includes(v);
+    c.classList.toggle('dim',!hit);
+    if(hit&&v&&!first)first=c;
+  });
+  return first;
+}
+q.addEventListener('input',find);
+q.addEventListener('keydown',e=>{if(e.key==='Enter'){const f=find();if(f)f.scrollIntoView({behavior:'smooth',block:'start'})}});
 
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('clockDisplay').textContent = hours + ':' + minutes;
-        }
-        updateClock();
-        setInterval(updateClock, 10000);
-    </script>
+/* jam & tahun */
+function tick(){
+  const n=new Date(),t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+  $('clockDisplay').textContent=t;$('clock2').textContent=t;
+}
+tick();setInterval(tick,10000);
+$('yr').textContent=new Date().getFullYear();
 
+addEventListener('load',()=>setTimeout(()=>$('loading').classList.add('hide'),1500));
+</script>
 </body>
 </html>
